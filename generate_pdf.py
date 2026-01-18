@@ -7,6 +7,17 @@ from reportlab.lib.units import inch
 from aws_content import aws_pages
 import os
 
+GITHUB_LINK = "https://github.com/pratik7mo/aws-notes-pdf"
+
+def add_page_footer(canvas, doc):
+    """Draws the GitHub link at the bottom right of every page."""
+    canvas.saveState()
+    canvas.setFont('Helvetica', 8)
+    canvas.setFillColor(colors.grey)
+    # Draw at bottom right: (x, y)
+    canvas.drawRightString(letter[0] - 40, 15, GITHUB_LINK)
+    canvas.restoreState()
+
 def create_pdf(filename):
     # Reduced margins to fit more on one page
     doc = SimpleDocTemplate(filename, pagesize=letter, topMargin=20, bottomMargin=20, leftMargin=40, rightMargin=40)
@@ -144,9 +155,9 @@ def create_pdf(filename):
         # Just a visual spacer between topics
         story.append(Spacer(1, 20))
         
-    # Build
+    # Build with footer
     try:
-        doc.build(story)
+        doc.build(story, onFirstPage=add_page_footer, onLaterPages=add_page_footer)
         print(f"Successfully created {filename}")
     except Exception as e:
         print(f"Error creating PDF: {e}")
