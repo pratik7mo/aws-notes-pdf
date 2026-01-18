@@ -7,7 +7,7 @@ from reportlab.lib.units import inch
 from aws_content import aws_pages
 import os
 
-GITHUB_LINK = "https://github.com/pratik7mo/aws-notes-pdf"
+GITHUB_LINK = "https://github.com/pratik7mo/aws-notes-pdf/raw/main/AWS_Notes_Sample.pdf"
 
 def add_page_footer(canvas, doc):
     """Draws the GitHub link at the bottom right of every page."""
